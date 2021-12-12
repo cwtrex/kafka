@@ -54,7 +54,7 @@ public final class StoreQueryUtils {
 
 
     @SuppressWarnings("unchecked")
-    private static final Map<Class<?>, QueryHandler> queryHandlers =
+    private static final Map<Class<?>, QueryHandler> QUERY_HANDLER_MAP =
         mkMap(
             mkEntry(
                 PingQuery.class,
@@ -105,7 +105,7 @@ public final class StoreQueryUtils {
         final long start = collectExecutionInfo ? System.nanoTime() : -1L;
         final QueryResult<R> result;
 
-        final QueryHandler handler = queryHandlers.get(query.getClass());
+        final QueryHandler handler = QUERY_HANDLER_MAP.get(query.getClass());
         if (handler == null) {
             result = QueryResult.forUnknownQueryType(query, store);
         } else if (!isPermitted(position, positionBound, partition)) {

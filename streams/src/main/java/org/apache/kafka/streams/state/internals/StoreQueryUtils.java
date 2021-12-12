@@ -16,15 +16,16 @@
  */
 package org.apache.kafka.streams.state.internals;
 
+import org.apache.kafka.common.utils.Bytes;
 import org.apache.kafka.streams.processor.StateStore;
 import org.apache.kafka.streams.processor.StateStoreContext;
 import org.apache.kafka.streams.processor.api.RecordMetadata;
 import org.apache.kafka.streams.query.FailureReason;
+import org.apache.kafka.streams.query.KeyQuery;
 import org.apache.kafka.streams.query.Position;
 import org.apache.kafka.streams.query.PositionBound;
 import org.apache.kafka.streams.query.Query;
 import org.apache.kafka.streams.query.QueryResult;
-import org.apache.kafka.streams.query.RawKeyQuery;
 import org.apache.kafka.streams.state.KeyValueStore;
 
 import java.io.PrintWriter;
@@ -52,20 +53,21 @@ public final class StoreQueryUtils {
     }
 
 
-    private static Map<Class, QueryHandler> queryHandlers =
+    @SuppressWarnings("unchecked")
+    private static final Map<Class<?>, QueryHandler> queryHandlers =
         mkMap(
             mkEntry(
                 PingQuery.class,
                 (query, positionBound, collectExecutionInfo, store) -> QueryResult.forResult(true)
             ),
-            mkEntry(RawKeyQuery.class,
+            mkEntry(KeyQuery.class,
                 (query, positionBound, collectExecutionInfo, store) -> {
                     if (store instanceof KeyValueStore) {
-                        final RawKeyQuery rawKeyQuery = (RawKeyQuery) query;
-                        final KeyValueStore keyValueStore = (KeyValueStore) store;
+                        final KeyQuery<Bytes, byte[]> rawKeyQuery = (KeyQuery<Bytes, byte[]>) query;
+                        final KeyValueStore<Bytes, byte[]> keyValueStore =
+                            (KeyValueStore<Bytes, byte[]>) store;
                         try {
-                            @SuppressWarnings("unchecked") final byte[] bytes =
-                                (byte[]) keyValueStore.get(rawKeyQuery.getKey());
+                            final byte[] bytes = keyValueStore.get(rawKeyQuery.getKey());
                             return QueryResult.forResult(bytes);
                         } catch (final Throwable t) {
                             final StringWriter stringWriter = new StringWriter();

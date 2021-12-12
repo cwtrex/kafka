@@ -39,7 +39,6 @@ import org.apache.kafka.streams.query.KeyQuery;
 import org.apache.kafka.streams.query.PositionBound;
 import org.apache.kafka.streams.query.Query;
 import org.apache.kafka.streams.query.QueryResult;
-import org.apache.kafka.streams.query.RawKeyQuery;
 import org.apache.kafka.streams.state.KeyValueIterator;
 import org.apache.kafka.streams.state.KeyValueStore;
 import org.apache.kafka.streams.state.StateSerdes;
@@ -241,7 +240,7 @@ public class MeteredKeyValueStore<K, V>
         final PositionBound positionBound, final boolean collectExecutionInfo) {
         final QueryResult<R> result;
         final KeyQuery<K, V> typedQuery = (KeyQuery<K, V>) query;
-        final RawKeyQuery rawKeyQuery = RawKeyQuery.withKey(keyBytes(typedQuery.getKey()));
+        final KeyQuery<Bytes, byte[]> rawKeyQuery = KeyQuery.withKey(keyBytes(typedQuery.getKey()));
         final QueryResult<byte[]> rawResult =
             wrapped().query(rawKeyQuery, positionBound, collectExecutionInfo);
         if (rawResult.isSuccess()) {

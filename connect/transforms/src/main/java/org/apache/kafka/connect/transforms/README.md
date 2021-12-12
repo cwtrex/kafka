@@ -8,9 +8,9 @@ cwtrex_custom to ensure the below enhancement details are not lost in time.
 * https://github.com/apache/kafka/tree/ecabbb3d8e4334acd259229eeee9bc8da5fe37d7/connect
 
 #### Related files:
-connect/transforms/src/main/java/org/apache/kafka/connect/transforms/ToStructByRegexTransform.java
-connect/transforms/src/main/java/org/apache/kafka/connect/transforms/util/GroupRegexValidator.java
-connect/transforms/src/test/java/org/apache/kafka/connect/transforms/ToStructByRegexTransformTest.java
+* connect/transforms/src/main/java/org/apache/kafka/connect/transforms/ToStructByRegexTransform.java
+* connect/transforms/src/main/java/org/apache/kafka/connect/transforms/util/GroupRegexValidator.java
+* connect/transforms/src/test/java/org/apache/kafka/connect/transforms/ToStructByRegexTransformTest.java
 
 #### First Example of Use:
 1. String parse ( with timemillis )

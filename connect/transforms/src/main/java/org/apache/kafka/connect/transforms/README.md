@@ -1,4 +1,4 @@
-#Purpose:
+# Purpose:
 cwtrex_custom to ensure the below enhancement details are not lost in time.
 
 #### Needed functionality for Kafka connect transform.  Added from:

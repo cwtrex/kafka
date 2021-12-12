@@ -2,10 +2,10 @@
 cwtrex_custom to ensure the below enhancement details are not lost in time.
 
 #### Needed functionality for Kafka connect transform.  Added from:
-https://cwiki.apache.org/confluence/display/KAFKA/KIP+678%3A+New+Kafka+Connect+SMT+for+plainText+%3D%3E+Struct%28or+Map%29+with+Regex
-https://github.com/apache/kafka/pull/7965
-https://issues.apache.org/jira/browse/KAFKA-9436
-https://github.com/apache/kafka/tree/ecabbb3d8e4334acd259229eeee9bc8da5fe37d7/connect
+* https://cwiki.apache.org/confluence/display/KAFKA/KIP+678%3A+New+Kafka+Connect+SMT+for+plainText+%3D%3E+Struct%28or+Map%29+with+Regex
+* https://github.com/apache/kafka/pull/7965
+* https://issues.apache.org/jira/browse/KAFKA-9436
+* https://github.com/apache/kafka/tree/ecabbb3d8e4334acd259229eeee9bc8da5fe37d7/connect
 
 #### Related files:
 connect/transforms/src/main/java/org/apache/kafka/connect/transforms/ToStructByRegexTransform.java
